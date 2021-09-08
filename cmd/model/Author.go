@@ -1,13 +1,9 @@
 package model
 
-import (
-	"time"
-)
-
 type Author struct {
-	ID        uint `gorm:"primaryKey"`
-	Name      string
-	Birthdate time.Time
-	Death     time.Time
-	Books     []Book
+	ID    uint   `gorm:"primaryKey"`
+	Name  string `json:"name"`
+	About string `json:"about"`
+	//Birthdate time.Time `json:"birthdate"`
+	//Death     time.Time `json:"death"`
 }

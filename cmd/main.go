@@ -1,6 +1,7 @@
 package main
 
 import (
+	"book-comments/cmd/database"
 	"book-comments/cmd/route"
 	"log"
 	"net/http"
@@ -9,10 +10,17 @@ import (
 )
 
 func main() {
+
 	router := mux.NewRouter().StrictSlash(true)
-	route.BookRoutes(router)
+
 	route.AuthorRoutes(router)
+	route.BookRoutes(router)
 	route.CategoryRoutes(router)
+	route.CommentRoutes(router)
+	route.AskRoutes(router)
+	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./static/")))
+	database.ConnectDB()
+	database.Migrate()
 	err := http.ListenAndServe(":8081", router)
 	if err != nil {
 		log.Fatalf("http listen err: %v", err)

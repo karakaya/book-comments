@@ -7,10 +7,10 @@ import (
 )
 
 func BookRoutes(router *mux.Router) {
-	router.PathPrefix("/book").Subrouter()
-	router.HandleFunc("/", controller.GetBooks).Methods("GET")
-	router.HandleFunc("/", controller.CreateBook).Methods("POST")
-	router.HandleFunc("/{id}", controller.GetBook).Methods("GET")
-	router.HandleFunc("/{id}", controller.UpdateBook).Methods("PATCH")
-	router.HandleFunc("/{id}", controller.DeleteBook).Methods("DELETE")
+	b := router.PathPrefix("/book").Subrouter()
+	b.HandleFunc("/", controller.GetBooks).Methods("GET")
+	b.HandleFunc("/", controller.CreateBook).Methods("POST")
+	b.HandleFunc("/{id}", controller.GetBook).Methods("GET")
+	b.HandleFunc("/{id}", controller.UpdateBook).Methods("PATCH")
+	b.HandleFunc("/{id}", controller.DeleteBook).Methods("DELETE")
 }

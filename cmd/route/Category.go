@@ -7,10 +7,10 @@ import (
 )
 
 func CategoryRoutes(router *mux.Router) {
-	router.PathPrefix("/category").Subrouter()
-	router.HandleFunc("/", controller.GetCategories).Methods("GET")
-	router.HandleFunc("/", controller.CreateCategory).Methods("POST")
-	router.HandleFunc("/{id}", controller.GetCategory).Methods("GET")
-	router.HandleFunc("/{id}", controller.UpdateCategory).Methods("PATCH")
-	router.HandleFunc("/{id}", controller.DeleteCategory).Methods("DELETE")
+	c := router.PathPrefix("/category").Subrouter()
+	c.HandleFunc("/", controller.GetCategories).Methods("GET")
+	c.HandleFunc("/", controller.CreateCategory).Methods("POST")
+	c.HandleFunc("/{id}", controller.GetCategory).Methods("GET")
+	c.HandleFunc("/{id}", controller.UpdateCategory).Methods("PATCH")
+	c.HandleFunc("/{id}", controller.DeleteCategory).Methods("DELETE")
 }
