@@ -14,6 +14,7 @@ type Book struct {
 	Category   Category
 	AuthorID   uint `json:"author"`
 	Author     Author
+	VoteCount  int `gorm:"default:0"`
 	CreatedAt  time.Time
 	DeletedAt  gorm.DeletedAt
 }

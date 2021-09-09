@@ -8,5 +8,6 @@ type Ask struct {
 	Content   string `json:"content"`
 	UserID    uint   `json:"user"`
 	User      User
+	VoteCount int
 	CreatedAt time.Time
 }

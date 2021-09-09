@@ -12,7 +12,7 @@ import (
 
 func GetBooks(w http.ResponseWriter, r *http.Request) {
 	var books []model.Book
-	err := database.DB.Find(&books).Error
+	err := database.DB.Preload("Category").Preload("Author").Find(&books).Error
 	if err != nil {
 		log.Printf("get book err %v \n", err)
 		w.WriteHeader(http.StatusBadRequest)
@@ -30,7 +30,7 @@ func GetBooks(w http.ResponseWriter, r *http.Request) {
 func GetBook(w http.ResponseWriter, r *http.Request) {
 	id := mux.Vars(r)["id"]
 	var book model.Book
-	err := database.DB.First(&book, id).Error
+	err := database.DB.Preload("Category").Preload("Author").First(&book, id).Error
 	if err != nil {
 		log.Printf("err: %v \n", err)
 		w.WriteHeader(http.StatusInternalServerError)
