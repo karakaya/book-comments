@@ -22,7 +22,7 @@ func main() {
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./static/")))
 	database.ConnectDB()
 	database.Migrate()
-	err := http.ListenAndServe(":8081", router)
+	err := http.ListenAndServe(":8080", router)
 	if err != nil {
 		log.Fatalf("http listen err: %v", err)
 	}

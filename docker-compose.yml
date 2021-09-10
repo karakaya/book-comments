@@ -1,0 +1,32 @@
+version: '3'
+
+services:
+  app:
+    container_name: bc_app
+    build:
+      context: .
+      dockerfile: Dockerfile
+    depends_on:
+      - mysql
+    restart: on-failure
+    volumes:
+      - .:/go/src/bookComments
+    ports:
+      - "8080:8080"
+    networks:
+      - bookCommentsNetwork
+  mysql:
+    container_name: bc_db
+    image: mysql:8.0
+    environment:
+      MYSQL_ROOT_PASSWORD: "password"
+      MYSQL_DATABASE: "bookComments"
+    volumes:
+      - /var/lib/mysql
+    networks:
+      - bookCommentsNetwork
+    ports:
+      - "3306:3306"
+networks:
+  bookCommentsNetwork:
+    driver: bridge
