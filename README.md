@@ -12,7 +12,7 @@ Book Comments is a forum for passionate readers.
     ```
 - Normal
  ```sh
- go run cmd/main.go
+ go run main.go
  ```
 
 

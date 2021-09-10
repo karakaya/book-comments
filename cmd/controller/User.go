@@ -9,13 +9,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
-	"gorm.io/gorm"
 )
-
-type Repository interface {
-	GetUser(id int) *model.User
-	CreateUser(r *http.Request)
-}
 
 func GetUsers(w http.ResponseWriter, r *http.Request) {
 	var users []model.User
@@ -34,11 +28,7 @@ func GetUsers(w http.ResponseWriter, r *http.Request) {
 	w.Write(res)
 }
 
-type repo struct {
-	DB *gorm.DB
-}
-
-func (p *repo) GetUser(w http.ResponseWriter, r *http.Request) {
+func GetUser(w http.ResponseWriter, r *http.Request) {
 	id := mux.Vars(r)["id"]
 	var user model.User
 	err := database.DB.First(&user, id).Error
