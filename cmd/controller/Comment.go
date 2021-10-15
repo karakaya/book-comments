@@ -54,7 +54,7 @@ func CreateComment(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
-
+	w.WriteHeader(http.StatusCreated)
 }
 
 func UpdateComment(w http.ResponseWriter, r *http.Request) {

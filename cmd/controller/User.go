@@ -59,6 +59,7 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		log.Printf("err : %v \n", err)
 		return
 	}
+	w.WriteHeader(http.StatusCreated)
 
 }
 
