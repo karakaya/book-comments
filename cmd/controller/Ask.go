@@ -12,7 +12,7 @@ import (
 
 func GetAsks(w http.ResponseWriter, r *http.Request) {
 	var asks []model.Ask
-	err := database.DB.Find(&asks).Error
+	err := database.DB.Preload("User").Find(&asks).Error
 	if err != nil {
 		log.Printf("err get ask's: %v \n", err)
 		w.WriteHeader(http.StatusInternalServerError)

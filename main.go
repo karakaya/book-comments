@@ -19,6 +19,7 @@ func main() {
 	route.CommentRoutes(router)
 	route.AskRoutes(router)
 	route.VoteRoutes(router)
+	route.UserRoute(router)
 	router.PathPrefix("/").Handler(http.FileServer(http.Dir("./static/")))
 	database.ConnectDB()
 	database.Migrate()

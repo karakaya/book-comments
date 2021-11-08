@@ -9,6 +9,7 @@ import (
 	"net/http"
 
 	"github.com/gorilla/mux"
+	"golang.org/x/crypto/bcrypt"
 )
 
 func GetUsers(w http.ResponseWriter, r *http.Request) {
@@ -54,6 +55,8 @@ func CreateUser(w http.ResponseWriter, r *http.Request) {
 		w.WriteHeader(http.StatusInternalServerError)
 		return
 	}
+	hash, _ := HashPassword(user.Password)
+	user.Password = hash
 	err := database.DB.Create(&user).Error
 	if err != nil {
 		log.Printf("err : %v \n", err)
@@ -92,4 +95,14 @@ func DeleteUser(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+}
+
+func HashPassword(password string) (string, error) {
+	bytes, err := bcrypt.GenerateFromPassword([]byte(password), 14)
+	return string(bytes), err
+}
+
+func CheckPasswordHash(password, hash string) bool {
+	err := bcrypt.CompareHashAndPassword([]byte(hash), []byte(password))
+	return err == nil
 }
